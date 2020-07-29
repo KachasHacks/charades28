@@ -1,26 +1,29 @@
 import Head from "next/head";
 import Link from "next/link";
-import VideoChat from "../components/videochat";
 
-export default function Home() {
+function Help() {
   return (
     <div className="container">
       <Head>
-        <title>Charades 28</title>
+        <title>Help</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
         <div>
-          <Link href="/help">
-            <a>Help</a>
+          <Link href="/index">
+            <a>Home</a>
           </Link>
         </div>
       </header>
-
       <main>
-        <VideoChat />
+        <div>
+          <h4>How to play</h4>
+          <p>Enter your username.</p>
+          <p>Enter a room name and send the room name to your opponent.</p>
+          <p>Once your video starts hit the start button!</p>
+          <p>Charades 28 is still a WIP</p>
+        </div>
       </main>
-
       <footer>
         <a
           href="https://kachamukabe.com"
@@ -147,3 +150,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Help;
