@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import firebase from "../firebase/clientApp";
 import { useObject } from "react-firebase-hooks/database";
+import styles from './game.module.css';
 
 const Game = ({ roomName }) => {
   const [seconds, setSeconds] = useState(28);
@@ -58,11 +59,9 @@ const Game = ({ roomName }) => {
 
   useEffect(() => {
     let number = Math.floor(Math.random()*gueses.length)
-    console.log(gueses[number])
     setCurrentGuess(gueses[number]);
   }, [gueses]);
 
-  console.log(currentGuess)
 
   return (
     <div>
@@ -75,14 +74,15 @@ const Game = ({ roomName }) => {
         </p>
       )}
 
-      <p>Seconds: {seconds}</p>
-      <button className="nes-btn is-primary" onClick={toggle}>
-        Start
+      <p>Seconds: {value && value.val().time}</p>
+      <p>Score: {value && value.val().score}</p>
+      <button className={`nes-btn is-primary ${styles.spacing}`} onClick={toggle}>
+        {isActive?"Stop":"Start"}
       </button>
-      <button className="nes-btn is-success" onClick={correct}>
+      <button className={`nes-btn is-success ${styles.spacing}`} onClick={correct}>
         Correct
       </button>
-      <button className="nes-btn is-error" onClick={wrong}>
+      <button className={`nes-btn is-error ${styles.spacing}`} onClick={wrong}>
         Wrong
       </button>
     </div>
