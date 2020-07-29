@@ -1,11 +1,22 @@
 import { useState, useEffect } from "react";
+import firebase from "../firebase/clientApp";
 import Video from "twilio-video";
 import Participant from "./participant";
+import Game from './game';
 import styles from "./room.module.css";
 
 const Room = ({ roomName, token, handleLogout }) => {
   const [room, setRoom] = useState(null);
   const [participants, setParticipants] = useState([]);
+
+  useEffect(() => {
+    firebase.database().ref(roomName).set({
+      room: roomName,
+      time: 28,
+      score: 0,
+      remoteScore: 0,
+    });
+  }, [roomName]);
 
   useEffect(() => {
     const participantConnected = (participant) => {
@@ -42,13 +53,20 @@ const Room = ({ roomName, token, handleLogout }) => {
     };
   }, [roomName, token]);
 
+  
+
+
   const remoteParticipants = participants.map((participant) => (
     <Participant key={participant.sid} participant={participant} />
   ));
 
   return (
     <div className="nes-container with-title is-centered">
-      <p className="title">Room: {roomName}</p>
+      
+      <p className="title">
+        Room: {roomName}
+      </p>
+      <Game roomName={roomName}/>
       <button className="nes-btn is-primary" onClick={handleLogout}>
         Log out
       </button>

@@ -1,4 +1,5 @@
 import "nes.css/css/nes.min.css";
+import firebase from '../firebase/clientApp';
 
 export default function MyApp({ Component, pageProps }) {
   return (
